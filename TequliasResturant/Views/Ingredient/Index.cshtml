@@ -1,0 +1,28 @@
+@model IEnumerable<Ingredient>
+
+@{
+    ViewData["Title"] = "Ingredients";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Ingredients</h1>
+    <a class="btn btn-primary" asp-action="Create">Add Ingredient</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ingredient in Model)
+        {
+            <tr>
+                <td>@ingredient.Name</td>
+                <td>@ingredient.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
