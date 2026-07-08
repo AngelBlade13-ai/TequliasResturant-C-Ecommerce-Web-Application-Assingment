@@ -38,3 +38,26 @@ Update-Database
 The create forms are intentionally plain. For example, `Product/Create` uses a raw `CategoryId` input instead of a dropdown. That leaves room to follow the tutorial sections on view models, select lists, and richer CRUD pages.
 
 Before submitting, make regular commits with descriptive messages and add screenshots showing the product catalog, cart, checkout, and order history.
+
+## Tutorial Checkpoint Branches
+
+Use these branches as working checkpoints while following the video:
+
+- `tutorial/01-models-and-database`
+- `tutorial/02-repository-and-crud`
+- `tutorial/03-products-categories-ingredients`
+- `tutorial/04-auth-and-navigation`
+- `tutorial/05-cart-and-session`
+- `tutorial/06-checkout-and-orders`
+- `tutorial/07-final-polish-and-submission`
+
+Example workflow:
+
+```powershell
+git switch tutorial/01-models-and-database
+git add .
+git commit -m "Complete models and database section"
+git push origin tutorial/01-models-and-database
+```
+
+Then move to the next branch when you start the next section.
