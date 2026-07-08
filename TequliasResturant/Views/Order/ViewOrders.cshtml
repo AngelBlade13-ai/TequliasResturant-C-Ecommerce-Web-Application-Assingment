@@ -25,7 +25,7 @@
                 <td>
                     @foreach (var item in order.OrderItems)
                     {
-                        <div>Product #@item.ProductId x @item.Quantity</div>
+                        <div>@item.Product?.Name x @item.Quantity (@item.Price.ToString("C"))</div>
                     }
                 </td>
             </tr>

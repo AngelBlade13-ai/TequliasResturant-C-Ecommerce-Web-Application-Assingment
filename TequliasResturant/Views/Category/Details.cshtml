@@ -1,0 +1,26 @@
+@model Category
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+<p>@Model.Description</p>
+
+<h2 class="h4">Products</h2>
+@if (Model.Products.Count == 0)
+{
+    <p>No products are assigned to this category yet.</p>
+}
+else
+{
+    <ul>
+        @foreach (var product in Model.Products)
+        {
+            <li>@product.Name</li>
+        }
+    </ul>
+}
+
+<a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.CategoryId">Edit</a>
+<a class="btn btn-outline-secondary" asp-action="Index">Back to Categories</a>

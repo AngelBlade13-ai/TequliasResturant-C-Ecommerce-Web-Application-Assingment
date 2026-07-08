@@ -15,6 +15,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Products</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,11 @@
                 <td>@category.Name</td>
                 <td>@category.Description</td>
                 <td>@category.Products.Count</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary" asp-action="Details" asp-route-id="@category.CategoryId">Details</a>
+                    <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@category.CategoryId">Edit</a>
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@category.CategoryId">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

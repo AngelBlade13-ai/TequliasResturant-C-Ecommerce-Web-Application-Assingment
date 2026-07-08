@@ -6,6 +6,11 @@
 
 <h1>Create Order</h1>
 
+@if (TempData["CartMessage"] is not null)
+{
+    <div class="alert alert-warning">@TempData["CartMessage"]</div>
+}
+
 <div class="row g-3">
     @foreach (var product in Model.Products)
     {
@@ -14,11 +19,12 @@
                 <div class="card-body d-flex flex-column">
                     <h2 class="h5">@product.Name</h2>
                     <p>@product.Description</p>
+                    <p class="mb-1"><strong>Available:</strong> @product.Stock</p>
                     <p class="fw-bold mt-auto">@product.Price.ToString("C")</p>
                     <form asp-action="AddItem" method="post" class="d-flex gap-2">
                         <input type="hidden" name="prodId" value="@product.ProductId" />
-                        <input class="form-control" type="number" name="prodQty" value="1" min="1" />
-                        <button class="btn btn-success" type="submit">Add</button>
+                        <input class="form-control" type="number" name="prodQty" value="1" min="1" max="@product.Stock" />
+                        <button class="btn btn-success" type="submit" disabled="@(product.Stock <= 0)">Add</button>
                     </form>
                 </div>
             </div>

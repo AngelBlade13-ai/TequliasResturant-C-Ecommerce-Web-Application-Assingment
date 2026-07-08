@@ -1,0 +1,26 @@
+@model Ingredient
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+<p>@Model.Description</p>
+
+<h2 class="h4">Used In</h2>
+@if (Model.ProductIngredients.Count == 0)
+{
+    <p>This ingredient has not been assigned to any products yet.</p>
+}
+else
+{
+    <ul>
+        @foreach (var productIngredient in Model.ProductIngredients)
+        {
+            <li>@productIngredient.Product?.Name</li>
+        }
+    </ul>
+}
+
+<a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.IngredientId">Edit</a>
+<a class="btn btn-outline-secondary" asp-action="Index">Back to Ingredients</a>

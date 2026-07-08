@@ -6,6 +6,11 @@
 
 <h1>Cart</h1>
 
+@if (TempData["CartMessage"] is not null)
+{
+    <div class="alert alert-warning">@TempData["CartMessage"]</div>
+}
+
 <form asp-action="PlaceOrder" method="post">
     <table class="table">
         <thead>
@@ -14,6 +19,7 @@
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Subtotal</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,13 +30,19 @@
                     <td>@item.Quantity</td>
                     <td>@item.Price.ToString("C")</td>
                     <td>@((item.Price * item.Quantity).ToString("C"))</td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-danger" type="submit" formaction="@Url.Action("RemoveItem", "Order", new { prodId = item.ProductId })">Remove</button>
+                    </td>
                 </tr>
             }
             <tr>
                 <td colspan="3" class="text-end fw-bold">Total</td>
                 <td class="fw-bold">@Model.TotalAmount.ToString("C")</td>
+                <td></td>
             </tr>
         </tbody>
     </table>
     <button class="btn btn-primary" type="submit">Place Order</button>
+    <button class="btn btn-outline-secondary" type="submit" formaction="@Url.Action("ClearCart", "Order")">Clear Cart</button>
+    <a class="btn btn-outline-secondary" asp-action="Create">Keep Shopping</a>
 </form>

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TequliasResturant.Extensions;
 using TequliasResturant.Models;
 using TequliasResturant.Models.Repositories;
@@ -37,6 +38,13 @@ public class OrderController : Controller
             return NotFound();
         }
 
+        var quantityToAdd = Math.Max(prodQty, 1);
+        if (product.Stock < quantityToAdd)
+        {
+            TempData["CartMessage"] = $"{product.Name} only has {product.Stock} in stock.";
+            return RedirectToAction(nameof(Create));
+        }
+
         var model = HttpContext.Session.GetObject<OrderViewModel>(CartSessionKey) ?? new OrderViewModel();
         var existingItem = model.OrderItems.FirstOrDefault(item => item.ProductId == prodId);
 
@@ -46,17 +54,52 @@ public class OrderController : Controller
             {
                 ProductId = product.ProductId,
                 ProductName = product.Name,
-                Quantity = Math.Max(prodQty, 1),
+                Quantity = quantityToAdd,
                 Price = product.Price
             });
         }
         else
         {
-            existingItem.Quantity += Math.Max(prodQty, 1);
+            if (existingItem.Quantity + quantityToAdd > product.Stock)
+            {
+                TempData["CartMessage"] = $"{product.Name} only has {product.Stock} in stock.";
+                return RedirectToAction(nameof(Create));
+            }
+
+            existingItem.Quantity += quantityToAdd;
         }
 
         model.TotalAmount = model.OrderItems.Sum(item => item.Price * item.Quantity);
         HttpContext.Session.SetObject(CartSessionKey, model);
+        return RedirectToAction(nameof(Create));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult RemoveItem(int prodId)
+    {
+        var model = HttpContext.Session.GetObject<OrderViewModel>(CartSessionKey);
+        if (model is null)
+        {
+            return RedirectToAction(nameof(Create));
+        }
+
+        var item = model.OrderItems.FirstOrDefault(orderItem => orderItem.ProductId == prodId);
+        if (item is not null)
+        {
+            model.OrderItems.Remove(item);
+            model.TotalAmount = model.OrderItems.Sum(orderItem => orderItem.Price * orderItem.Quantity);
+            HttpContext.Session.SetObject(CartSessionKey, model);
+        }
+
+        return model.OrderItems.Count == 0 ? RedirectToAction(nameof(Create)) : RedirectToAction(nameof(Cart));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult ClearCart()
+    {
+        HttpContext.Session.Remove(CartSessionKey);
         return RedirectToAction(nameof(Create));
     }
 
@@ -100,6 +143,24 @@ public class OrderController : Controller
             }).ToList()
         };
 
+        foreach (var item in order.OrderItems)
+        {
+            var product = await _products.GetByIdAsync(item.ProductId);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            if (product.Stock < item.Quantity)
+            {
+                TempData["CartMessage"] = $"{product.Name} only has {product.Stock} in stock.";
+                return RedirectToAction(nameof(Cart));
+            }
+
+            product.Stock -= item.Quantity;
+            _products.Update(product);
+        }
+
         await _orders.AddAsync(order);
         await _orders.SaveAsync();
         HttpContext.Session.Remove(CartSessionKey);
@@ -114,7 +175,13 @@ public class OrderController : Controller
             return Challenge();
         }
 
-        var orders = await _orders.GetAllByIdAsync(userId, nameof(Order.UserId), order => order.OrderItems);
+        var orders = await _orders.Query()
+            .Include(order => order.OrderItems)
+                .ThenInclude(orderItem => orderItem.Product)
+            .Where(order => order.UserId == userId)
+            .OrderByDescending(order => order.OrderDate)
+            .ToListAsync();
+
         return View(orders);
     }
 }

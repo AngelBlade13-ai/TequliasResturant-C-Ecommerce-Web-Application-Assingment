@@ -1,17 +1,18 @@
 # Feature Checklist
 
-- [x] User Authentication skeleton through ASP.NET Core Identity
-- [x] Product Catalog starter page
-- [x] Category management starter page
-- [x] Ingredient management starter page
-- [x] Shopping Cart starter using session
-- [x] Checkout/place order starter
-- [x] User order history starter
-- [ ] Full CRUD for all models
-- [ ] Product-to-ingredient selection UI
-- [ ] Better validation and error messages
+- [x] User Authentication through ASP.NET Core Identity
+- [x] Product Catalog page
+- [x] Product create, details, edit, and delete
+- [x] Category create, details, edit, and delete
+- [x] Ingredient create, details, edit, and delete
+- [x] Product-to-ingredient selection UI
+- [x] Shopping Cart using session
+- [x] Remove item and clear cart
+- [x] Checkout/place order
+- [x] User order history with product names
+- [x] Stock validation during cart/checkout
 - [ ] Final screenshots or short demo video
 
 ## Incomplete Areas
 
-The app is intentionally a skeleton. The main remaining work is adding complete edit/details/delete pages, improving forms with dropdowns and view models, and refining the order history display.
+The main remaining submission task is capturing screenshots or recording a short demo video.

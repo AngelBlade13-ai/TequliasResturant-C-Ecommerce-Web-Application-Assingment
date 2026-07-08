@@ -15,6 +15,11 @@ public class Repository<T> : IRepository<T> where T : class
         _dbSet = context.Set<T>();
     }
 
+    public IQueryable<T> Query()
+    {
+        return _dbSet.AsQueryable();
+    }
+
     public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
     {
         IQueryable<T> query = _dbSet;
@@ -30,6 +35,18 @@ public class Repository<T> : IRepository<T> where T : class
     public async Task<T?> GetByIdAsync(int id)
     {
         return await _dbSet.FindAsync(id);
+    }
+
+    public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+    {
+        IQueryable<T> query = _dbSet;
+
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
+
+        return await query.FirstOrDefaultAsync(predicate);
     }
 
     public async Task<IEnumerable<T>> GetAllByIdAsync<TKey>(TKey id, string propertyName, params Expression<Func<T, object>>[] includes)

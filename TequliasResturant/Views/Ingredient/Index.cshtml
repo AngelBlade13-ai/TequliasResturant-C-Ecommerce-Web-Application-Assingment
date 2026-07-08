@@ -14,6 +14,7 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,11 @@
             <tr>
                 <td>@ingredient.Name</td>
                 <td>@ingredient.Description</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary" asp-action="Details" asp-route-id="@ingredient.IngredientId">Details</a>
+                    <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@ingredient.IngredientId">Edit</a>
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@ingredient.IngredientId">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
