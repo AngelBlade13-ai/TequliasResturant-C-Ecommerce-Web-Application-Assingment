@@ -4,5 +4,5 @@ namespace TequliasResturant.Models;
 
 public class ApplicationUser : IdentityUser
 {
-    public ICollection<Order> Orders { get; set; } = new List<Order>();
+    public ICollection<Order>? Orders { get; set; } = new List<Order>();
 }

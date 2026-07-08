@@ -18,53 +18,74 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Product> Products => Set<Product>();
     public DbSet<ProductIngredient> ProductIngredients => Set<ProductIngredient>();
 
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(builder);
+        base.OnModelCreating(modelBuilder);
 
-        builder.Entity<ProductIngredient>()
+        // Define composite key and relationships for ProductIngredient
+
+        modelBuilder.Entity<ProductIngredient>()
             .HasKey(productIngredient => new { productIngredient.ProductId, productIngredient.IngredientId });
 
-        builder.Entity<ProductIngredient>()
+        modelBuilder.Entity<ProductIngredient>()
             .HasOne(productIngredient => productIngredient.Product)
             .WithMany(product => product.ProductIngredients)
             .HasForeignKey(productIngredient => productIngredient.ProductId);
 
-        builder.Entity<ProductIngredient>()
+        modelBuilder.Entity<ProductIngredient>()
             .HasOne(productIngredient => productIngredient.Ingredient)
             .WithMany(ingredient => ingredient.ProductIngredients)
             .HasForeignKey(productIngredient => productIngredient.IngredientId);
 
-        builder.Entity<Product>()
+        //
+
+        modelBuilder.Entity<Product>()
             .Property(product => product.Price)
             .HasPrecision(18, 2);
 
-        builder.Entity<OrderItem>()
+        modelBuilder.Entity<OrderItem>()
             .Property(orderItem => orderItem.Price)
             .HasPrecision(18, 2);
 
-        builder.Entity<Order>()
+        modelBuilder.Entity<Order>()
             .Property(order => order.TotalAmount)
             .HasPrecision(18, 2);
 
-        builder.Entity<Category>().HasData(
-            new Category { CategoryId = 1, Name = "Tacos", Description = "Starter seed data for follow-along testing." },
-            new Category { CategoryId = 2, Name = "Drinks", Description = "Add more categories during the tutorial." });
+        //Seed Data
 
-        builder.Entity<Product>().HasData(
-            new Product { ProductId = 1, Name = "Beef Taco", Description = "Sample menu item.", Price = 4.99m, Stock = 25, CategoryId = 1 },
-            new Product { ProductId = 2, Name = "Veggie Taco", Description = "Sample menu item.", Price = 5.49m, Stock = 20, CategoryId = 1 },
-            new Product { ProductId = 3, Name = "Horchata", Description = "Sample drink.", Price = 2.99m, Stock = 30, CategoryId = 2 });
+        modelBuilder.Entity<Category>().HasData(
+            new Category { CategoryId = 1, Name = "Appetizer" },
+            new Category { CategoryId = 2, Name = "Entree" },
+            new Category { CategoryId = 3, Name = "Side Dish" },
+            new Category { CategoryId = 4, Name = "Dessert" },
+            new Category { CategoryId = 5, Name = "Beverage" });
 
-        builder.Entity<Ingredient>().HasData(
-            new Ingredient { IngredientId = 1, Name = "Tortilla" },
-            new Ingredient { IngredientId = 2, Name = "Beef" },
-            new Ingredient { IngredientId = 3, Name = "Lettuce" });
+        modelBuilder.Entity<Product>().HasData(
+            new Product { ProductId = 1, Name = "Beef Taco", Description = "A delicious beef taco.", Price = 2.50m, Stock = 100, CategoryId = 2 },
+            new Product { ProductId = 2, Name = "Chicken Taco", Description = "A delicious chicken taco.", Price = 1.99m, Stock = 101, CategoryId = 2 },
+            new Product { ProductId = 3, Name = "Fish Taco", Description = "A delicious fish taco.", Price = 3.99m, Stock = 90, CategoryId = 2 });
 
-        builder.Entity<ProductIngredient>().HasData(
+        modelBuilder.Entity<Ingredient>().HasData(
+            //add mexican restaurant ingredients here
+            new Ingredient { IngredientId = 1, Name = "Beef" },
+            new Ingredient { IngredientId = 2, Name = "Chicken" },
+            new Ingredient { IngredientId = 3, Name = "Fish" },
+            new Ingredient { IngredientId = 4, Name = "Tortilla" },
+            new Ingredient { IngredientId = 5, Name = "Lettuce" },
+            new Ingredient { IngredientId = 6, Name = "Tomato" });
+
+        modelBuilder.Entity<ProductIngredient>().HasData(
             new ProductIngredient { ProductId = 1, IngredientId = 1 },
-            new ProductIngredient { ProductId = 1, IngredientId = 2 },
-            new ProductIngredient { ProductId = 2, IngredientId = 1 },
-            new ProductIngredient { ProductId = 2, IngredientId = 3 });
+            new ProductIngredient { ProductId = 1, IngredientId = 4 },
+            new ProductIngredient { ProductId = 1, IngredientId = 5 },
+            new ProductIngredient { ProductId = 1, IngredientId = 6 },
+            new ProductIngredient { ProductId = 2, IngredientId = 2 },
+            new ProductIngredient { ProductId = 2, IngredientId = 4 },
+            new ProductIngredient { ProductId = 2, IngredientId = 5 },
+            new ProductIngredient { ProductId = 2, IngredientId = 6 },
+            new ProductIngredient { ProductId = 3, IngredientId = 3 },
+            new ProductIngredient { ProductId = 3, IngredientId = 4 },
+            new ProductIngredient { ProductId = 3, IngredientId = 5 },
+            new ProductIngredient { ProductId = 3, IngredientId = 6 });
     }
 }
