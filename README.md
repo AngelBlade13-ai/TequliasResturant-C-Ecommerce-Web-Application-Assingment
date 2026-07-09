@@ -1,6 +1,21 @@
 # Tequilas Restaurant
 
-This is an ASP.NET Core MVC restaurant e-commerce app based on the tutorial video. It includes Identity login, Entity Framework Core models, a repository pattern, product/category/ingredient management, a session-based shopping cart, checkout, and user order history.
+Tequilas Restaurant is an ASP.NET Core MVC restaurant e-commerce application. Customers can browse menu items, register or log in, add products to a session-based cart, place orders, and view their order history.
+
+The app also includes management pages for products, categories, and ingredients, with Entity Framework Core handling the restaurant database relationships.
+
+## Features
+
+- ASP.NET Core MVC with Identity authentication
+- Entity Framework Core with SQL Server LocalDB
+- Product, category, ingredient, order, and order item models
+- Many-to-many product ingredient relationships
+- Generic repository pattern
+- Product catalog with item photos
+- Product/category/ingredient create, details, edit, and delete pages
+- Session-based shopping cart
+- Checkout with stock validation
+- User order history
 
 ## Setup
 
@@ -13,47 +28,15 @@ Update-Database
 ```
 
 4. Run the project.
-5. Register a user, then try the product catalog, order page, cart, and my orders page.
+5. Register a user account to test ordering, cart, checkout, and order history.
 
-## Feature Checklist
+## Demo Suggestions
 
-- [x] ASP.NET Core MVC project with Identity authentication
-- [x] ApplicationUser model connected to orders
-- [x] Product, Category, Ingredient, Order, OrderItem, and ProductIngredient models
-- [x] EF Core DbContext with relationships and starter seed data
-- [x] Generic repository pattern
-- [x] Product catalog page
-- [x] Category and ingredient management pages
-- [x] Session-based cart
-- [x] Place order and view orders flow
-- [x] Full edit/details/delete CRUD pages for products, categories, and ingredients
-- [x] Product ingredient management UI
-- [x] Checkout with stock validation
-- [ ] Screenshots or demo video for submission
+For a project demo or screenshots, show:
 
-## Submission Notes
-
-Before submitting, make sure your GitHub repository is public and add screenshots or a short demo video showing the product catalog, cart, checkout, and order history.
-
-## Tutorial Checkpoint Branches
-
-Use these branches as working checkpoints while following the video:
-
-- `tutorial/01-models-and-database`
-- `tutorial/02-repository-and-crud`
-- `tutorial/03-products-categories-ingredients`
-- `tutorial/04-auth-and-navigation`
-- `tutorial/05-cart-and-session`
-- `tutorial/06-checkout-and-orders`
-- `tutorial/07-final-polish-and-submission`
-
-Example workflow:
-
-```powershell
-git switch tutorial/01-models-and-database
-git add .
-git commit -m "Complete models and database section"
-git push origin tutorial/01-models-and-database
-```
-
-Then move to the next branch when you start the next section.
+- Home page
+- Product catalog
+- Product details or edit page
+- Shopping cart
+- Checkout/order placement
+- My Orders page
