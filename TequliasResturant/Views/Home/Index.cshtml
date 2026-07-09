@@ -2,27 +2,35 @@
     ViewData["Title"] = "Home";
 }
 
-<section class="py-5">
-    <div class="row align-items-center g-4">
-        <div class="col-lg-7">
-            <h1 class="display-5 fw-semibold">Tequilas Restaurant e-commerce skeleton</h1>
-            <p class="lead">A follow-along starter for the ASP.NET Core MVC tutorial: Identity login, EF Core models, repository pattern, menu catalog, cart, and orders.</p>
-            <div class="d-flex gap-2">
-                <a class="btn btn-primary" asp-controller="Product" asp-action="Index">View Products</a>
-                <a class="btn btn-outline-secondary" asp-controller="Order" asp-action="Create">Start Order</a>
-            </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="border rounded p-4 bg-light">
-                <h2 class="h5">Follow-along checklist</h2>
-                <ul class="mb-0">
-                    <li>Run migrations for the restaurant tables.</li>
-                    <li>Replace shortcut forms with polished CRUD pages.</li>
-                    <li>Connect products to ingredients.</li>
-                    <li>Improve order history display.</li>
-                    <li>Add screenshots for the assignment submission.</li>
-                </ul>
-            </div>
+<section class="hero-panel">
+    <div class="hero-copy">
+        <p class="eyebrow">Tooele's casual taco stop</p>
+        <h1>Fresh Mexican favorites, ready when you are.</h1>
+        <p class="lead">Browse the menu, build a cart, and place a simple online order for tacos, drinks, and restaurant favorites.</p>
+        <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-primary btn-lg" asp-controller="Order" asp-action="Create">Start an Order</a>
+            <a class="btn btn-outline-light btn-lg" asp-controller="Product" asp-action="Index">View Menu</a>
         </div>
     </div>
+</section>
+
+<section class="feature-strip">
+    <div>
+        <strong>Fresh Ingredients</strong>
+        <span>Menu items connect directly to ingredients.</span>
+    </div>
+    <div>
+        <strong>Simple Cart</strong>
+        <span>Session-based cart keeps your order together.</span>
+    </div>
+    <div>
+        <strong>Order History</strong>
+        <span>Registered users can review past orders.</span>
+    </div>
+</section>
+
+<section class="section-heading">
+    <p class="eyebrow">Built with ASP.NET Core MVC</p>
+    <h2>Restaurant ordering demo</h2>
+    <p>This project shows authentication, Entity Framework relationships, CRUD pages, product ingredients, cart session data, and checkout.</p>
 </section>

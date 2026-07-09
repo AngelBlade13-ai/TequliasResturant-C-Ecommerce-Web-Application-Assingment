@@ -4,12 +4,15 @@
     ViewData["Title"] = "Ingredients";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h1>Ingredients</h1>
+<div class="page-title-row">
+    <div>
+        <p class="eyebrow">Kitchen inventory</p>
+        <h1>Ingredients</h1>
+    </div>
     <a class="btn btn-primary" asp-action="Create">Add Ingredient</a>
 </div>
 
-<table class="table">
+<table class="table table-polished">
     <thead>
         <tr>
             <th>Name</th>

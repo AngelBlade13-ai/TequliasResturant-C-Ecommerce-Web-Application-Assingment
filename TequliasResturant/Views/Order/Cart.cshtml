@@ -4,7 +4,13 @@
     ViewData["Title"] = "Cart";
 }
 
-<h1>Cart</h1>
+<div class="page-title-row">
+    <div>
+        <p class="eyebrow">Checkout</p>
+        <h1>Your Cart</h1>
+    </div>
+    <a class="btn btn-outline-primary" asp-action="Create">Keep Shopping</a>
+</div>
 
 @if (TempData["CartMessage"] is not null)
 {
@@ -12,7 +18,7 @@
 }
 
 <form asp-action="PlaceOrder" method="post">
-    <table class="table">
+    <table class="table table-polished">
         <thead>
             <tr>
                 <th>Product</th>
@@ -44,5 +50,4 @@
     </table>
     <button class="btn btn-primary" type="submit">Place Order</button>
     <button class="btn btn-outline-secondary" type="submit" formaction="@Url.Action("ClearCart", "Order")">Clear Cart</button>
-    <a class="btn btn-outline-secondary" asp-action="Create">Keep Shopping</a>
 </form>

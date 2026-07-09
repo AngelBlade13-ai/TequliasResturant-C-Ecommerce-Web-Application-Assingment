@@ -1,5 +1,20 @@
+:root {
+    --ink: #27130d;
+    --muted: #755f55;
+    --paper: #fffaf3;
+    --surface: #ffffff;
+    --brand: #b73520;
+    --brand-dark: #7d2117;
+    --accent: #f5a623;
+    --green: #26734d;
+    --line: rgba(39, 19, 13, 0.12);
+    --shadow: 0 18px 45px rgba(39, 19, 13, 0.13);
+}
+
 html {
     font-size: 14px;
+    min-height: 100%;
+    position: relative;
 }
 
 @media (min-width: 768px) {
@@ -8,15 +23,298 @@ html {
     }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body {
-    margin-bottom: 60px;
+    background: radial-gradient(circle at top left, rgba(245, 166, 35, 0.18), transparent 34rem), var(--paper);
+    color: var(--ink);
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin-bottom: 0;
+}
+
+a {
+    color: var(--brand);
+}
+
+.site-nav {
+    background: linear-gradient(90deg, #2c120b, #6d1d14);
+    box-shadow: 0 8px 24px rgba(39, 19, 13, 0.18);
+}
+
+.brand-mark {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 250, 243, 0.86);
+    font-weight: 600;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: #ffffff;
+}
+
+.navbar .btn-link {
+    color: rgba(255, 250, 243, 0.86);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.page-shell {
+    min-height: calc(100vh - 134px);
+    padding: 2rem 0 3rem;
+}
+
+.site-footer {
+    background: #27130d;
+    color: rgba(255, 250, 243, 0.78);
+    padding: 1.25rem 0;
+}
+
+.hero-panel {
+    align-items: center;
+    background:
+        linear-gradient(90deg, rgba(39, 19, 13, 0.9), rgba(39, 19, 13, 0.6) 42%, rgba(39, 19, 13, 0.14)),
+        url("/images/tequilas-hero.png");
+    background-position: center;
+    background-size: cover;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    color: #ffffff;
+    display: flex;
+    min-height: 520px;
+    overflow: hidden;
+    padding: clamp(2rem, 6vw, 5rem);
+}
+
+.hero-copy {
+    max-width: 640px;
+}
+
+.hero-copy h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 850;
+    line-height: 0.98;
+    margin-bottom: 1.25rem;
+}
+
+.hero-copy .lead {
+    color: rgba(255, 250, 243, 0.9);
+    max-width: 560px;
+}
+
+.eyebrow {
+    color: var(--brand);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+}
+
+.hero-panel .eyebrow {
+    color: #ffd27a;
+}
+
+.feature-strip {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(39, 19, 13, 0.07);
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 1.5rem 0 3rem;
+    overflow: hidden;
+}
+
+.feature-strip > div {
+    background: #ffffff;
+    padding: 1.35rem;
+}
+
+.feature-strip strong {
+    display: block;
+    font-size: 1.05rem;
+}
+
+.feature-strip span,
+.section-heading p,
+.menu-desc,
+.ingredient-list,
+.text-muted {
+    color: var(--muted) !important;
+}
+
+.section-heading {
+    margin: 0 auto 1.5rem;
+    max-width: 760px;
+    text-align: center;
+}
+
+.page-title-row {
+    align-items: end;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.page-title-row h1 {
+    font-weight: 800;
+    margin-bottom: 0.15rem;
+}
+
+.card,
+.table-polished,
+form:not(.form-inline) {
+    border-color: var(--line);
+    border-radius: 14px;
+}
+
+.menu-card {
+    border: 0;
+    box-shadow: 0 12px 28px rgba(39, 19, 13, 0.09);
+    overflow: hidden;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.menu-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+}
+
+.menu-card-img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    width: 100%;
+}
+
+.menu-card .card-body {
+    padding: 1.25rem;
+}
+
+.price-pill {
+    background: #fff1d2;
+    border: 1px solid rgba(245, 166, 35, 0.35);
+    border-radius: 999px;
+    color: var(--brand-dark);
+    flex: 0 0 auto;
+    font-weight: 800;
+    padding: 0.25rem 0.7rem;
+}
+
+.meta-label {
+    color: var(--brand-dark);
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    margin-right: 0.35rem;
+    text-transform: uppercase;
+}
+
+.table-polished {
+    background: var(--surface);
+    box-shadow: 0 10px 28px rgba(39, 19, 13, 0.07);
+    overflow: hidden;
+}
+
+.table-polished thead {
+    background: #fff1d2;
+}
+
+.table-polished th {
+    border-bottom: 0;
+    color: var(--brand-dark);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.table-polished td,
+.table-polished th {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.btn {
+    border-radius: 999px;
+    font-weight: 700;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+}
+
+.btn-primary,
+.btn-success {
+    background: var(--brand);
+    border-color: var(--brand);
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+    background: var(--brand-dark);
+    border-color: var(--brand-dark);
+}
+
+.btn-outline-primary {
+    border-color: var(--brand);
+    color: var(--brand);
+}
+
+.btn-outline-primary:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+}
+
+.form-control,
+.form-select {
+    border-color: var(--line);
+    border-radius: 10px;
+    padding: 0.7rem 0.85rem;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.2rem rgba(245, 166, 35, 0.22);
+}
+
+main > form:not(.form-inline) {
+    background: var(--surface);
+    box-shadow: 0 10px 28px rgba(39, 19, 13, 0.07);
+    padding: 1.5rem;
+}
+
+dl.row {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(39, 19, 13, 0.07);
+    padding: 1.25rem;
+}
+
+@media (max-width: 767.98px) {
+    .hero-panel {
+        min-height: 440px;
+        padding: 2rem;
+    }
+
+    .feature-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .page-title-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .page-title-row .btn {
+        align-self: flex-start;
+    }
 }
